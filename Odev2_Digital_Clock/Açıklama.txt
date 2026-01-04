@@ -1,0 +1,9 @@
+1. Saatin Doğruluğu
+Saat hesabı, yazılımsal gecikmeler yerine Tiva C'nin donanımsal Timer0 modülü ile yapılır.
+İşlemci saatini referans alan bu yöntem, milisaniye hassasiyetinde doğruluk sağlar. 
+Zaman sayma işlemi kesme (interrupt) tabanlı olduğu için ana döngüdeki yoğunluktan etkilenmez ve saatin geri kalmasını önler.
+
+2. Ekran Yenilenme Hızı
+LCD ekran, gözün algılayabileceği ve karakterlerin net görünebileceği bir hızda güncellenir.
+Ekranın çok hızlı yenilenmesi "titreme" (flicker) etkisine yol açacağından, kodda saniye geçişlerine uygun bir tazeleme oranı tercih edilmiştir.
+Bu sayede işlemci gereksiz yere yorulmaz ve net bir görüntü elde edilir.
