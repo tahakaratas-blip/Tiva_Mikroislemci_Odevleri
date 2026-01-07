@@ -1,0 +1,19 @@
+## 📡 Haberleşme Mantığı ve Çalışma Prensibi
+
+Bu proje, Bilgisayar (PC) ve Tiva C arasında **UART (Evrensel Asenkron Alıcı-Verici)** protokolü üzerinden çift yönlü haberleşme sağlar. Sistem şu 4 adımda çalışır:
+
+1.  **PC (Arayüz):** Kullanıcı GUI üzerindeki butona bastığında, bilgisayar seri port üzerinden Tiva C'ye tek baytlık bir komut gönderir (Örn: `'1'` karakteri).
+2.  **İletim:** Bu veri, USB kablosu üzerinden sanal seri port (COM Port) aracılığıyla Tiva C'nin UART modülüne iletilir.
+3.  **Tiva C (İşlem):** Mikrodenetleyici gelen veriyi kesme (interrupt) ile yakalar.
+    * Eğer gelen veri `'1'` ise -> **Mavi LED'i Yak**.
+    * Eğer gelen veri `'0'` ise -> **LED'i Söndür**.
+4.  **Geri Bildirim (Feedback):** Tiva C, işlemi başarıyla gerçekleştirdiğinde PC'ye durum raporu gönderir (Örn: `"LED Yandi"`). Bu mesaj arayüzdeki log ekranına düşer.
+
+### 🔄 Veri Akış Şeması
+
+```text
+[ PC Arayüzü ]  --('1')-->  [ USB Kablo ]  --('1')-->  [ Tiva C ]
+      ^                                                     |
+      |                                                     |
+      |---------("LED Yandi")---------<---------------------|
+                               (Onay Mesajı)
